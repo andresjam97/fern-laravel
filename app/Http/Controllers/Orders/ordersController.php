@@ -118,5 +118,17 @@ class ordersController extends Controller
         }
     }
 
+    function sendOrder(Request $request) {
+        try {
+            $order = OrderHead::find($request->id);
+            $order->estado == 'FINALIZADO';
+            $order->save();
+            return response('ok',200);
+        } catch (\Throwable $th) {
+            return response($th->getMessage(), 500);
+        }
+
+    }
+
 
 }

@@ -32,6 +32,9 @@ Route::prefix('orders')->controller(ordersController::class)->group(function () 
 
     Route::get('{id}','orderDetails')->name('orders-details');
     Route::post('{id}','orderDetailsInsert')->name('orders-details-insert');
+
+    Route::post('send','sendOrder')->name('orders-details-send');
+
 });
 
 Route::prefix('imports')->controller(ImportsController::class)->group(function () {

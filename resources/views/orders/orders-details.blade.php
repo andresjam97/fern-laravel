@@ -96,6 +96,9 @@
 
         </table>
     </div>
+
+
+    <button class="btn btn-primary finalizar">Finalizar</button>
     </div>
 
 

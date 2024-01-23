@@ -67,4 +67,37 @@ document.getElementById('otros').addEventListener('change', function() {
     }
   });
 
+  $('.finalizar').click(function (e) {
+    e.preventDefault();
+    let id = $('#identify').val();
+    $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      });
+    $.ajax({
+        type: "POST",
+        url: "/orders/send",
+        data: {
+            "id" : id
+        },
+        success: function (response) {
+            Swal.fire(
+                'Exito',
+                'Orden enviada con exito',
+                'success'
+            )
+            window.location.href('/orders');
+        },
+        error: function(error){
+            Swal.fire(
+                'Error',
+                'Error interno',
+                'error'
+            )
+            console.error(error);
+        }
+    });
+  });
+
 
