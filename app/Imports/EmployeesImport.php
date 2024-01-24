@@ -4,8 +4,9 @@ namespace App\Imports;
 
 use App\Models\Employe;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithStartRow;
 
-class EmployeesImport implements ToModel
+class EmployeesImport implements ToModel, WithStartRow
 {
     /**
     * @param array $row
@@ -17,5 +18,10 @@ class EmployeesImport implements ToModel
         return new Employe([
             'name'     => $row[0],
         ]);
+    }
+
+    public function startRow(): int
+    {
+        return 2;
     }
 }

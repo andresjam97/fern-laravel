@@ -15,11 +15,14 @@ class ImportsController extends Controller
         return view('imports.employeesImport');
     }
 
-    function importEmployes(Request $request) {
-
-        Excel::import(new EmployeesImport, $request->file('adjunto'));
-
-        return redirect('/')->with('success', 'All good!');
+    public function importEmployes(Request $request)
+    {
+        try {
+            Excel::import(new EmployeesImport, $request->file('adjunto'));
+            return back()->with('success', '¡Importación exitosa!');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Error en la importación: ' . $e->getMessage());
+        }
     }
 
 
@@ -28,9 +31,14 @@ class ImportsController extends Controller
     }
 
     function importBooks(Request $request) {
+        try{
         Excel::import(new BooksImport, $request->file('adjunto'));
 
-        return redirect('/')->with('success', 'All good!');
+        return back()->with('success', '¡Importación exitosa!');
+    } catch (\Exception $e) {
+        return back()->with('error', 'Error en la importación: ' . $e->getMessage());
+    }
+
     }
 
 
@@ -39,8 +47,12 @@ class ImportsController extends Controller
     }
 
     function importSchools(Request $request) {
-        Excel::import(new SchoolsImport, $request->file('adjunto'));
+        try {
+            Excel::import(new SchoolsImport, $request->file('adjunto'));
+            return back()->with('success', '¡Importación exitosa!');
+        }catch (\Exception $e) {
+            return back()->with('error', 'Error en la importación: ' . $e->getMessage());
+        }
 
-        return redirect('/')->with('success', 'All good!');
     }
 }

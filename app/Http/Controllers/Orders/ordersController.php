@@ -4,15 +4,18 @@ namespace App\Http\Controllers\Orders;
 
 use App\Http\Controllers\Controller;
 use App\Models\Book;
+use App\Models\Employe;
 use App\Models\Orders\OrderDetail;
 use App\Models\Orders\OrderHead;
+use App\Models\School;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
 class ordersController extends Controller
 {
     function index() {
-        return view('orders.orders-index');
+        $empleados = Employe::all();
+        return view('orders.orders-index', ['empleados' => $empleados]);
     }
 
     function createOrder(Request $request) {
@@ -128,6 +131,16 @@ class ordersController extends Controller
             return response($th->getMessage(), 500);
         }
 
+    }
+
+
+    function getSchools(Request $request, $id) {
+        $sugerenciasFiltradas = School::where('name', 'like', '%' . $request->term . '%')
+            ->where('employe_id', $id)
+            ->select('id','name')
+            ->toArray();
+
+        return response()->json($sugerenciasFiltradas);
     }
 
 

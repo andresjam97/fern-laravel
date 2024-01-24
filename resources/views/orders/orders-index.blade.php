@@ -28,7 +28,9 @@
                 <label for="vendedor">Vendedor</label>
                 <select name="vendedor" id="vendedor" class="form-select">
                     <option value="">Seleccione una Opcion</option>
-                    <option value="pepito">Pepito perez</option>
+                    @foreach ($empleados as $empleado)
+                        <option value="{{ $empleado->id }}">{{ $empleado->name }}</option>
+                    @endforeach
                 </select>
             </div>
 

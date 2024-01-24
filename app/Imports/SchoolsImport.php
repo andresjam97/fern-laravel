@@ -5,8 +5,9 @@ namespace App\Imports;
 use App\Models\Employe;
 use App\Models\School;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithStartRow;
 
-class SchoolsImport implements ToModel
+class SchoolsImport implements ToModel,WithStartRow
 {
     /**
     * @param array $row
@@ -18,11 +19,17 @@ class SchoolsImport implements ToModel
         $employeeIdentifier = $row[1];
 
 
-        $employee = Employe::where('id', $employeeIdentifier)->first();
+        $employee = Employe::where('name', 'like','%'.$employeeIdentifier.'%')->first();
 
         return new School([
             'name'     => $row[0],
             'employe_id'     => $employee->id,
         ]);
+    }
+
+
+    public function startRow(): int
+    {
+        return 2;
     }
 }

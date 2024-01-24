@@ -29,6 +29,7 @@ Route::prefix('orders')->controller(ordersController::class)->group(function () 
     Route::post('','createOrder')->name('orders-create');
     Route::get('getOrders','getOrders')->name('orders-get');
     Route::get('getOrderDetails/{id}','getorderDetails')->name('orders-get-details');
+    Route::get('getSchools/{id}','getSchools')->name('orders-get-schools');
 
     Route::get('{id}','orderDetails')->name('orders-details');
     Route::post('{id}','orderDetailsInsert')->name('orders-details-insert');

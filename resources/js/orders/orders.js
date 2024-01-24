@@ -1,28 +1,4 @@
 $(document).ready(function () {
-    var availableTags = [
-        "ActionScript",
-        "AppleScript",
-        "Asp",
-        "BASIC",
-        "C",
-        "C++",
-        "Clojure",
-        "COBOL",
-        "ColdFusion",
-        "Erlang",
-        "Fortran",
-        "Groovy",
-        "Haskell",
-        "Java",
-        "JavaScript",
-        "Lisp",
-        "Perl",
-        "PHP",
-        "Python",
-        "Ruby",
-        "Scala",
-        "Scheme"
-      ];
 
       $('#table-orders-main').DataTable({
         "processing": true,
@@ -48,8 +24,35 @@ $(document).ready(function () {
     $('#fecha').datepicker();
 
     $( "#colegio" ).autocomplete({
-        source: availableTags
-      });
+        source: function(request, response) {
+            // Realizar la solicitud AJAX para obtener sugerencias
+            let empleado = $('#vendedor').val();
+            $.ajax({
+                url: "/orders/getSchools/"+empleado,
+                dataType: "json",
+                data: {
+                    term: request.term
+                },
+                success: function(data) {
 
+                      var sugerenciasMapeadas = data.map(function(item) {
+                        return {
+                            label: item.name,
+                            value: item.id
+                        };
+                    });
+                    response(sugerenciasMapeadas);
+                },
+                error: function(error) {
+                    console.error('Error al obtener sugerencias: ', error);
+                }
+            });
+        },
+        minLength: 3,
+        select: function(event, ui) {
+            // Aquí puedes acceder al ID seleccionado a través de ui.item.value
+            console.log('ID seleccionado:', ui.item.value);
+        }
+    });
 });
 

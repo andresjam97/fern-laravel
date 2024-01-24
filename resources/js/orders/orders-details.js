@@ -66,7 +66,7 @@ document.getElementById('otros').addEventListener('change', function() {
         div.classList.add('d-none');
     }
   });
-
+//llamar un maestro d eclientes y jalar los libros de ese listado
   $('.finalizar').click(function (e) {
     e.preventDefault();
     let id = $('#identify').val();
