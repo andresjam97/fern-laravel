@@ -98,8 +98,8 @@
     </div>
 
 
-    <button class="btn btn-primary finalizar">Finalizar</button>
-    </div>
+    <button type="button" class="btn btn-primary" id="finalizar">Finalizar</button>
+</div>
 
 
     @if (session('alerta'))

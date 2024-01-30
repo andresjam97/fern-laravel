@@ -1,4 +1,38 @@
 $(document).ready(function () {
+    $('#finalizar').click(function (e) {
+        let id = $('#identify').val();
+        $.ajaxSetup({
+            headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+          });
+        $.ajax({
+            type: "POST",
+            url: "/orders/sendOrderDetails",
+            data: {
+                "id" : id
+            },
+            success: function (response) {
+                Swal.fire(
+                    'Exito',
+                    'Orden enviada con exito',
+                    'success'
+                )
+                $(location).attr('href','/orders');
+            },
+            error: function(error){
+                Swal.fire(
+                    'Error',
+                    'Error interno',
+                    'error'
+                )
+                console.error(error);
+            }
+        });
+      });
+
+
+
     let id = $('#identify').val();
 
     inicializarTabla(id);
@@ -65,39 +99,6 @@ document.getElementById('otros').addEventListener('change', function() {
     } else {
         div.classList.add('d-none');
     }
-  });
-//llamar un maestro d eclientes y jalar los libros de ese listado
-  $('.finalizar').click(function (e) {
-    e.preventDefault();
-    let id = $('#identify').val();
-    $.ajaxSetup({
-        headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-      });
-    $.ajax({
-        type: "POST",
-        url: "/orders/send",
-        data: {
-            "id" : id
-        },
-        success: function (response) {
-            Swal.fire(
-                'Exito',
-                'Orden enviada con exito',
-                'success'
-            )
-            window.location.href('/orders');
-        },
-        error: function(error){
-            Swal.fire(
-                'Error',
-                'Error interno',
-                'error'
-            )
-            console.error(error);
-        }
-    });
   });
 
 

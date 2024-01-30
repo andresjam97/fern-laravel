@@ -49,7 +49,16 @@ class ordersController extends Controller
             $btn = '<button class="btn btn-danger btn-sm" onclick="destroy('.$row->id.')"><i class="fas fa-delete-left"></i></button>';
             return $btn;
         })
-        ->rawColumns(['destroy'])
+
+        ->addColumn('manage', function($row) {
+            $btn = ' <div class="btn-group" role="group" aria-label="Botones de Colores">
+                        <button type="button" class="btn btn-outline-primary return" data-id="'.$row->id.'" ><i class="fas fa-arrow-rotate-left"></i></button>
+                        <button type="button" class="btn btn-outline-success sell" data-id="'.$row->id.'" ><i class="fab fa-sellsy"></i></button>
+                        <button type="button" class="btn btn-outline-danger pending" data-id="'.$row->id.'"><i class="fas fa-hourglass-half"></i></button>
+                    </div>';
+            return $btn;
+        })
+        ->rawColumns(['destroy','manage'])
         ->make(true);
     }
 
@@ -58,23 +67,30 @@ class ordersController extends Controller
 
         return DataTables::of($datos)
         ->addColumn('detalles', function($row) {
-            $btn = '<button class="btn btn-info btn-sm" onclick="ver('.$row->id.')"><i class="fas fa-search"></i></button>';
+            $btn = '<button class="btn btn-info btn-sm ver" data-id="'.$row->id.'"><i class="fas fa-search"></i></button>';
             return $btn;
         })
 
         ->addColumn('editar', function($row) {
-            $btn = '<a class="btn btn-warning btn-sm" href="/orders/'.$row->id.'" target="_blank"><i class="fas fa-pencil"></i></a>';
+
+            $btn = '<a class="btn btn-warning btn-sm" href="/orders/'.$row->id.'"><i class="fas fa-pencil"></i></a>';
+
             return $btn;
         })
 
         ->addColumn('confirm', function($row) {
-            $btn = '<button class="btn btn-success btn-sm" onclick="confirm('.$row->id.')"><i class="fas fa-check"></i></button>';
+            if ($row->is_confirmed) {
+                $btn = 'N/A';
+
+            } else {
+                $btn = '<button class="btn btn-success btn-sm confirm" data-id="'.$row->id.'"><i class="fas fa-check"></i></button>';
+            }
             return $btn;
         })
 
 
         ->addColumn('manage', function($row) {
-            $btn = '<button class="btn btn-primary btn-sm" onclick="manage('.$row->id.')"><i class="fas fa-list-check"></i></button>';
+            $btn = '<button class="btn btn-primary btn-sm manage" data-id="'.$row->id.'"><i class="fas fa-list-check"></i></button>';
             return $btn;
         })
 
@@ -121,10 +137,10 @@ class ordersController extends Controller
         }
     }
 
-    function sendOrder(Request $request) {
+    function sendOrderDetails(Request $request) {
         try {
             $order = OrderHead::find($request->id);
-            $order->estado == 'FINALIZADO';
+            $order->estado = 'FINALIZADO';
             $order->save();
             return response('ok',200);
         } catch (\Throwable $th) {
@@ -142,6 +158,29 @@ class ordersController extends Controller
 
         return response()->json($sugerenciasFiltradas);
     }
+
+
+    function orderConfirmDelivery($id) {
+
+        try {
+            $order = OrderHead::find($id);
+            $order->is_confirmed = true;
+            $order->save();
+            return response('ok',200);
+        } catch (\Throwable $th) {
+            return response($th->getMessage(), 500);
+
+        }
+
+
+    }
+
+
+    function orderManagementAproveView() {
+        return view('orders.orders-management-aprove');
+    }
+
+
 
 
 }

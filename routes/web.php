@@ -26,15 +26,18 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::prefix('orders')->controller(ordersController::class)->group(function () {
     Route::get('','index')->name('orders-name');
+    Route::get('management/aprove','orderManagementAproveView')->name('orders-name-management');
     Route::post('','createOrder')->name('orders-create');
     Route::get('getOrders','getOrders')->name('orders-get');
     Route::get('getOrderDetails/{id}','getorderDetails')->name('orders-get-details');
     Route::get('getSchools/{id}','getSchools')->name('orders-get-schools');
+    Route::post('sendOrderDetails','sendOrderDetails');
+    Route::get('confirm/{id}','orderConfirmDelivery')->name('orders-confirm-delivery');
 
     Route::get('{id}','orderDetails')->name('orders-details');
     Route::post('{id}','orderDetailsInsert')->name('orders-details-insert');
 
-    Route::post('send','sendOrder')->name('orders-details-send');
+
 
 });
 
