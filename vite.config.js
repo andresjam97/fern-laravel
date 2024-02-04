@@ -13,6 +13,9 @@ export default defineConfig({
                 'resources/js/orders/orders.js',
                 'resources/css/orders/orders-details.css',
                 'resources/js/orders/orders-details.js',
+                //---------------game------------------
+                'resources/js/game/game.js',
+                'resources/css/game/game.css',
             ],
             refresh: true,
         }),

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Imports\ImportsController;
 use App\Http\Controllers\Orders\ordersController;
+use App\Http\Controllers\QqsmController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -39,6 +40,18 @@ Route::prefix('orders')->controller(ordersController::class)->group(function () 
 
 
 
+});
+
+Route::prefix('game')->controller(QqsmController::class)->middleware('auth')->group(function () {
+    Route::get('','index')->name('game-qqsm');
+    Route::post('', 'startNewGame');
+    Route::get('create-question','createQuestionVw')->name('create-question-vw');
+    Route::post('create-question','createQuestion')->name('create-question');
+
+    Route::get("last-game", 'reloadPreviousGame');
+    Route::get("ranking-score", 'ranksByScore');
+    Route::get("ranking-accuracy", 'ranksByAccuracy');
+    Route::put('{game}/check-answer', 'checkAnswer');
 });
 
 Route::prefix('imports')->controller(ImportsController::class)->group(function () {

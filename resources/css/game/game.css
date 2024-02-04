@@ -1,0 +1,151 @@
+/* Estilos generales */
+body {
+    font-family: 'Arial', sans-serif; /* Elige una fuente que prefieras */
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    text-align: center; /* Centra el contenido */
+}
+
+/* Contenedor principal del juego */
+.game-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 10px;
+    background: #219b40; /* Un verde translúcido */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.image-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.left-image,
+.right-image {
+    width: 150px; /* Ajusta el ancho según sea necesario */
+    height: 150px; /* Ajusta la altura según sea necesario */
+    border-radius: 5px; /* Añade bordes redondeados si deseas */
+}
+
+.right-image {
+    margin-left: auto;
+    margin-top: -200px;
+}
+
+/* Logo del juego */
+.logo-container img {
+    max-width: 100%;
+    height: 50%;
+    border-radius: 10px;
+}
+
+/* Texto debajo de la imagen */
+.image-text {
+    position: absolute;
+    bottom: -35px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.8rem; /* Ajusta el tamaño del texto según sea necesario */
+    color: #fff; /* Color del texto */
+}
+
+/* Contenedor de la pregunta */
+.question-container {
+    color: #ffffff;
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: 5px;
+    text-shadow: 0 0 8px #ffffff; /* Sombra de texto dorada */
+}
+
+/* Contenedor de las opciones de respuesta */
+.answers-container {
+    margin: 20px 0;
+}
+
+/* Estilos individuales para cada respuesta */
+.answer {
+    background: #ffffff; /* Un verde más oscuro para las opciones de respuesta */
+    color: #606060;
+    margin-bottom: 10px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: 1px solid #ffffff; /* Bordes dorados */
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.answer:hover {
+    transform: translateY(-5px); /* Efecto de elevación al pasar el mouse */
+}
+
+/* Clases de Bootstrap para los colores de fondo de respuestas */
+.bg-success {
+    background-color: #70A83B !important; /* Verde para respuestas correctas */
+}
+
+.bg-danger {
+    background-color: #FF0000 !important; /* Rojo para respuestas incorrectas */
+}
+
+/* Estilos para cada ícono y número */
+.icon-container {
+    position: relative;
+    display: inline-block;
+    margin: 10px;
+}
+
+.icon-container.score .icon-number {
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1rem; /* Ajusta el tamaño del número según sea necesario */
+    color: #000000; /* Color del número */
+
+}
+
+
+.icon-container.nivel .icon-number {
+    position: absolute;
+    top: 90%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    font-size: 1rem; /* Ajusta el tamaño del número según sea necesario */
+    color: #fff; /* Color del número */
+}
+
+.icon-container.ranking .icon-number {
+    position: absolute;
+    top: 92%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1rem; /* Ajusta el tamaño del número según sea necesario */
+    color: #fff; /* Color del número */
+}
+
+
+.icon-container.performance .icon-number {
+    position: absolute;
+    top: 90%;
+    left: 55%;
+    transform: translate(-50%, -50%);
+    font-size: 1rem; /* Ajusta el tamaño del número según sea necesario */
+    color: #fff; /* Color del número */
+}
+
+
+/* Añadir media queries para la responsividad si es necesario */
+@media (max-width: 768px) {
+    .game-container {
+        padding: 10px;
+    }
+
+    .question-container, .answer {
+        padding: 10px;
+    }
+}
