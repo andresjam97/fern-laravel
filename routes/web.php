@@ -37,9 +37,6 @@ Route::prefix('orders')->controller(ordersController::class)->group(function () 
 
     Route::get('{id}','orderDetails')->name('orders-details');
     Route::post('{id}','orderDetailsInsert')->name('orders-details-insert');
-
-
-
 });
 
 Route::prefix('game')->controller(QqsmController::class)->middleware('auth')->group(function () {
@@ -63,5 +60,9 @@ Route::prefix('imports')->controller(ImportsController::class)->group(function (
 
     Route::get('schools','schoolVw')->name('import-book-vw');
     Route::post('schools','importSchools')->name('import-school');
+
+
+    Route::get('questions','questionsVw')->name('import-questions-vw');
+    Route::post('questions-import','importQuestions')->name('import-questions');
 });
 
