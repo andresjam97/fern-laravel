@@ -32,22 +32,21 @@
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="/">Inicio</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{{ url('/register') }}">Registrarse</a>
-              </li>
-
-              @auth
-                @if (auth()->user()->id == 2 || auth()->user()->id == 3)
-                  <form action="{{route('truncate')}}">
-                    @csrf
-                    <button type="submit" class="btn btn-info">Vaciar preguntas</button>
-                  </form>
-                @endif    
-              @endauth
 
               <li class="nav-item">
                 <a class="nav-link" href="{{ route('game-qqsm') }}">Quien quiere ser millonario Juego</a>
               </li>
+
+              @auth
+                @if (auth()->user()->id == 2 || auth()->user()->id == 3)
+                  <li class="nav-item">
+                    <form action="{{route('truncate')}}" method="POST">
+                      @csrf
+                      <button type="submit" class="btn btn-info">Vaciar preguntas</button>
+                    </form>
+                  </li>
+                @endif    
+              @endauth
             </ul>
           </div>
         </div>

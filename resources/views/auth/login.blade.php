@@ -156,6 +156,11 @@
                                     {{ __('Login') }}
                                 </button>
 
+
+                    
+                                <a class="btn btn-warning" href="{{ url('/register') }}" target="_blank">Registrarse</a>
+                                
+
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link" >
                                         {{ __('Forgot Your Password?') }}

@@ -256,7 +256,7 @@ class QqsmController extends Controller
 
     }
 
-    function truncate() {
+    function truncate(Request $request) {
         $questions = Question::truncate();
         return back()->with('truncate', 'Preguntas vaciadas');
     }
