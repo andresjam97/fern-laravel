@@ -37,7 +37,7 @@
               </li>
 
               @auth
-                @if (auth()->user()->id == 2)
+                @if (auth()->user()->id == 2 || auth()->user()->id == 3)
                   <form action="{{route('truncate')}}">
                     @csrf
                     <button type="submit" class="btn btn-info">Vaciar preguntas</button>
