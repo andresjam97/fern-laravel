@@ -33,8 +33,17 @@
                 <a class="nav-link active" aria-current="page" href="/">Inicio</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ route('create-question-vw') }}">Quien quiere ser millonario Crear Preguntas</a>
+                <a class="nav-link" href="{{ url('/register') }}">Registrarse</a>
               </li>
+
+              @auth
+                @if (auth()->user()->id == 2)
+                  <form action="{{route('truncate')}}">
+                    @csrf
+                    <button type="submit" class="btn btn-info">Vaciar preguntas</button>
+                  </form>
+                @endif    
+              @endauth
 
               <li class="nav-item">
                 <a class="nav-link" href="{{ route('game-qqsm') }}">Quien quiere ser millonario Juego</a>
@@ -45,6 +54,11 @@
       </nav>
       <main>
         <div class="container">
+          @if(session('message'))
+            <div class="alert alert-success mt-3">
+                {{ session('message') }}
+            </div>
+        @endif
             @yield('content')
         </div>
     </main>
