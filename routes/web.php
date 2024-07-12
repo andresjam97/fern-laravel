@@ -49,7 +49,7 @@ Route::prefix('game')->controller(QqsmController::class)->middleware('auth')->gr
     Route::get("ranking-score", 'ranksByScore');
     Route::get("ranking-accuracy", 'ranksByAccuracy');
     Route::put('{game}/check-answer', 'checkAnswer');
-    Route::get("truncate", 'truncate');
+    Route::get("truncate", 'truncate')->name('truncate');
 
 
 });
